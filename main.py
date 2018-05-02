@@ -1,4 +1,4 @@
-from flask import Flask, session, redirect, url_for, escape, request
+from flask import Flask, render_template, session, redirect, url_for, escape, request
 
 app = Flask(__name__)
 
@@ -6,19 +6,14 @@ app = Flask(__name__)
 def index():
     if 'username' in session:
         return "Logged in as %s" % escape(session['username'])
-    return "This is the landingpage"
+    return render_template('home.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         session['username'] = request.form['username']
         return redirect(url_for('index'))
-    return '''
-        <form method="post">
-            <p><input type=text name=username></p>
-            <p><input type=submit value=Login></p>
-        </form>
-    '''
+    return render_template('login.html')
 
 @app.route('/logout')
 def logout():
@@ -32,4 +27,4 @@ def profile(username):
 app.secret_key = 'hello'
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
