@@ -5,13 +5,12 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     if 'username' in session:
-        return "Logged in as %s" % escape(session['username'])
-    return render_template('home.html')
+        return render_template('home.html', username=escape(session['username'])
+    return render_template('home.html', username='nobody')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        print(request.form)
         session['username'] = request.form['username']
         return redirect(url_for('index'))
     return render_template('login.html')
