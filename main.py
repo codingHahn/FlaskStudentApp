@@ -5,7 +5,8 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     if 'username' in session:
-        return render_template('home.html', username=escape(session['username'])
+        return render_template('home.html', username=escape(session['username']))
+
     return render_template('home.html', username='nobody')
 
 @app.route('/login', methods=['GET', 'POST'])
