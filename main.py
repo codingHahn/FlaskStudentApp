@@ -1,5 +1,5 @@
 from flask import  render_template, session, redirect, url_for, escape, request
-from app import app
+from app import app, models
 
 @app.route('/')
 @app.route('/index')
