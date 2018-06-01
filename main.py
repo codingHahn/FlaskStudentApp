@@ -25,6 +25,8 @@ def logout():
 def profile(username):
     return "Userprofile of " + username
 
+
+
 app.secret_key = 'hello'
 
 if __name__ == '__main__':

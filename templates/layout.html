@@ -6,7 +6,10 @@
 	<link rel="stylesheet" href="/static/css/bootstrap.css">
     </head>
     <body>
-	{% block body %}{% endblock %}
+	{% include 'includes/_navbar.html' %}
+	<div>
+		{% block body %}{% endblock %}
+	</div>
 	<script src="/static/js/bootstrap.js"></script>
     </body>
 </html>
