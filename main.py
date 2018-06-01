@@ -26,6 +26,5 @@ def profile(username):
         return "Your own userprofile: " + username
     return "Userprofile of " + username
 
-
 if __name__ == '__main__':
     app.run(debug=True)
