@@ -23,8 +23,12 @@ def logout():
 @app.route('/u/<username>')
 def profile(username):
     if username == session['username']:
-        return "Your own userprofile: " + username
+        return redirect(url_for('editprofile'))
     return "Userprofile of " + username
+@app.route('/editprofile/<username>/')
+def editprofile(username):
+    return render_template('editprofile.html', username=username)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
