@@ -25,10 +25,19 @@ def profile(username):
     if username == session['username']:
         return redirect(url_for('editprofile'))
     return "Userprofile of " + username
+#set directory for editing profiles
 @app.route('/editprofile/<username>/')
 def editprofile(username):
     return render_template('editprofile.html', username=username)
 
+#set directory for registration
+@app.route('/register/')
+def registration():
+    return render_template('register.html')
+#set directory for changing Email
+@app.route('/editprofile/<username>/change-email/')
+def changeEmail(username):
+    return render_template('change-email.html', username=username)
 
 if __name__ == '__main__':
     app.run(debug=True)

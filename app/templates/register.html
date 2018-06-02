@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+    <h1>Registrieren</h1>
+    <form>
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Name">
+            </div>
+            <div class="col">
+                <input type="email" class="form-control" placeholder="Email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="password" class="form-control" placeholder="Passwort">
+            </div>
+            <div class="col">
+                <input type="password" class="form-control" placeholder="Passwort bestätigen">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Vorname">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Nachname">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrieren</button>
+    </form>
+</div>
+
+{% endblock %}
