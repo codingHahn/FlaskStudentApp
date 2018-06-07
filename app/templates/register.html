@@ -4,31 +4,23 @@
 <div class="container">
     <h1>Registrieren</h1>
     <form>
-        <div class="row mb-3">
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Name">
-            </div>
-            <div class="col">
-                <input type="email" class="form-control" placeholder="Email">
-            </div>
+        <div class="form-group pt-2">
+            <label for="Name">Name:</label>
+            <input type="text" class="form-control" id="Name" placeholder="Vor- und Nachname">
         </div>
-        <div class="row mb-3">
-            <div class="col">
-                <input type="password" class="form-control" placeholder="Passwort">
-            </div>
-            <div class="col">
-                <input type="password" class="form-control" placeholder="Passwort bestätigen">
-            </div>
+        <div class="form-group pt-2">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="max.mustermann@example.com">
         </div>
-        <div class="row mb-3">
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Vorname">
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" placeholder="Nachname">
-            </div>
+        <div class="form-group pt-2">
+            <label for="confirmemail">Email bestätigen:</label>
+            <input type="email" class="form-control" id="confirmemail" placeholder="Confirm Email Adress">
         </div>
-        <button type="submit" class="btn btn-primary">Registrieren</button>
+        <div class="form-group pt-2">
+            <label for="ConfirmPassword">Passwort:</label>
+            <input type="password" class="form-control" id="ConfirmPassword" placeholder=" Enter Password">
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Registrieren</button>
     </form>
 </div>
 

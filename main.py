@@ -38,6 +38,10 @@ def registration():
 @app.route('/editprofile/<username>/change-email/')
 def changeEmail(username):
     return render_template('change-email.html', username=username)
+#add impressum.html
+@app.route('/impressum')
+def impressum():
+    return render_template('includes/_impressum.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
