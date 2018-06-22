@@ -33,7 +33,9 @@ def editprofile(username):
 #set directory for registration
 @app.route('/register/')
 def registration():
-    return render_template('register.html')
+    #if 'username' in session:
+        #return redirect(url_for('index'))
+    return render_template('register.html', username=session['username'])
 #set directory for changing Email
 @app.route('/editprofile/<username>/change-email/')
 def changeEmail(username):
