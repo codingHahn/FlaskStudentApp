@@ -5,14 +5,21 @@
 	<title>MyFlaskApp</title>
 	<link rel="stylesheet" href="/static/css/bootstrap.css">
     </head>
-    <body>
+	<body>
 	{% include 'includes/_navbar.html' %}
 	<div>
-		{% block body %}{% endblock %}
+		{% block body %} {% endblock %}
 	</div>
 	<script src="/static/js/bootstrap.js"></script>
-    </body>
-	<footer class="bg-dark fixed-bottom">
-		<a href="/impressum"><p>Impressum</p></a>
-	</footer>
+	</body>
+
+	<div>
+		<footer class="bg-dark mt-4" role="navigation">
+			<a href="/impressum"><p class="text-center">Impressum</p></a>
+		</footer>
+	</div>
 </html>
+
+<style>
+
+</style>

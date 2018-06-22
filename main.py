@@ -12,6 +12,7 @@ def index():
 def login():
     if request.method == 'POST':
         session['username'] = request.form['username']
+        print(request.form.get('remember'))
         return redirect(url_for('index'))
     return render_template('login.html')
 
@@ -35,7 +36,7 @@ def editprofile(username):
 def registration():
     #if 'username' in session:
         #return redirect(url_for('index'))
-    return render_template('register.html', username=session['username'])
+    return render_template('register.html')
 #set directory for changing Email
 @app.route('/editprofile/<username>/change-email/')
 def changeEmail(username):
@@ -44,6 +45,7 @@ def changeEmail(username):
 @app.route('/impressum')
 def impressum():
     return render_template('includes/_impressum.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
