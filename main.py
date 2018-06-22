@@ -13,14 +13,19 @@ def login():
     if request.method == 'POST':
         session['username'] = request.form['username']
         print(request.form.get('remember'))
+        session['logged-in'] = True
         return redirect(url_for('index'))
-    return render_template('login.html')
+    if not session.get('logged-in'):
+        return render_template('login.html')
+    return redirect(url_for('index'))
 
 @app.route('/logout')
 def logout():
     session.pop("username", None)
+    session.pop('logged-in', None)
     return redirect(url_for('index'))
 
+@app.route('/user/<username>')
 @app.route('/u/<username>')
 def profile(username):
     if username == session['username']:
@@ -32,8 +37,10 @@ def editprofile(username):
     return render_template('editprofile.html', username=username)
 
 #set directory for registration
-@app.route('/register/')
+@app.route('/register/', methods=['GET', 'POST'])
 def registration():
+    if session.get('logged-in'):
+        return redirect(url_for('index'))
     return render_template('register.html')
 #set directory for changing Email
 @app.route('/editprofile/<username>/change-email/')
