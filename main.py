@@ -24,8 +24,25 @@ def logout():
 @app.route('/u/<username>')
 def profile(username):
     if username == session['username']:
-        return "Your own userprofile: " + username
+        return redirect(url_for('editprofile'))
     return "Userprofile of " + username
+#set directory for editing profiles
+@app.route('/editprofile/<username>/')
+def editprofile(username):
+    return render_template('editprofile.html', username=username)
+
+#set directory for registration
+@app.route('/register/')
+def registration():
+    return render_template('register.html')
+#set directory for changing Email
+@app.route('/editprofile/<username>/change-email/')
+def changeEmail(username):
+    return render_template('change-email.html', username=username)
+#add impressum.html
+@app.route('/impressum')
+def impressum():
+    return render_template('includes/_impressum.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+    <h2>Email-Adresse ändern</h2>
+    <form>
+        <div class="form-group mt-2">
+            <label for="NewMail">Neue Email:</label>
+            <input type="email" class="form-control" id="NewMail" placeholder="max.mustermann@example.com">
+        </div>
+        <div class="form-group">
+            <label for="ConfirmPassword">Passwort:</label>
+            <input type="password" class="form-control" id="ConfirmPassword" placeholder="Passwort">
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Bestätigen</button>
+    </form>
+</div>
+{% endblock %}
