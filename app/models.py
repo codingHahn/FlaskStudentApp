@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 from werkzeug.security import generate_password_hash, check_password_hash
-=======
->>>>>>> master
 from app import db
 
 class User(db.Model):
