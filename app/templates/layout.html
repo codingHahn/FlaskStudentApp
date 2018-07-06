@@ -6,16 +6,18 @@
 	<link rel="stylesheet" href="/static/css/bootstrap.css">
     </head>
 	<body>
-	{% include 'includes/_navbar.html' %}
-	<div>
-		{% block body %} {% endblock %}
+	<div class="h-100">
+		{% include 'includes/_navbar.html' %}
+		<div>
+			{% block body %} {% endblock %}
+		</div>
+		<script src="/static/js/bootstrap.bundle.min.js"></script>
 	</div>
-	<script src="/static/js/bootstrap.js"></script>
 	</body>
 
 	<div>
-		<footer class="bg-dark mt-4" role="navigation">
-			<a href="/impressum"><p class="text-center">Impressum</p></a>
+		<footer class="bg-dark mt-4 pb-2 pt-2">
+			<a href="/impressum"><p class="text-center m-0">Impressum</p></a>
 		</footer>
 	</div>
 </html>

@@ -2,15 +2,21 @@
 
 {% block body %}
 
-<p>This is the landingpage</p>
-<p>You are currently logged in as: {{username}}</p>
-<a href="/login">Login to the app</a>
+<div class="p-2">
+    <p>This is the landingpage</p>
+    <p>You are currently logged in as: {{username}}</p>
+    <a href="/login">Login to the app</a>
 
 
-<form method="get" action="/editprofile/{{ username }}">
-    <button class="btn btn-primary" type="submit">EDIT</button>
-</form>
-
-
+    <form method="get" action="/editprofile/{{ username }}">
+        <button class="btn btn-primary" type="submit">EDIT</button>
+    </form>
+</div>
+<style>
+html,
+body {
+  height: 95.5%;
+}
+</style>
 {% endblock %}
 

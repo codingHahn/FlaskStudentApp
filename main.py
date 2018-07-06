@@ -32,7 +32,7 @@ def editprofile(username):
     return render_template('editprofile.html', username=username)
 
 #set directory for registration
-@app.route('/register/')
+@app.route('/register/', methods=['GET', 'POST'])
 def registration():
     #if 'username' in session:
         #return redirect(url_for('index'))
@@ -46,6 +46,9 @@ def changeEmail(username):
 def impressum():
     return render_template('includes/_impressum.html')
 
+@app.route('/home-test')
+def Konzept():
+    return render_template('home-test.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
