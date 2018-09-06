@@ -1,3 +1,6 @@
+# Database
+app.db
+# IDE and vim files
 tags
 .idea/
 # Byte-compiled / optimized / DLL files
