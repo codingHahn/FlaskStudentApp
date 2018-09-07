@@ -46,9 +46,6 @@ def changeEmail(username):
 def impressum():
     return render_template('includes/_impressum.html')
 
-@app.route('/home-test')
-def Konzept():
-    return render_template('home-test.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
