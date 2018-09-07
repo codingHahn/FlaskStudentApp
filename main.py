@@ -4,6 +4,7 @@ from app import app, models
 # TODO: GDPR compliance
 #       - cookie prefs.
 #       - account deletion 
+# TODO: Rewrite all forms with wtforms
 
 # Landing Page Logic
 @app.route('/')
@@ -16,6 +17,7 @@ def index():
 
 
 # TODO: Check if user exists in database
+# TODO: Rewrite for LoginManager
 # Login logic 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -32,6 +34,7 @@ def login():
     return redirect(url_for('index'))
 
 
+# TODO: Rewrite for LoginManager
 @app.route('/logout')
 def logout():
     session.pop("username", None)
@@ -40,6 +43,7 @@ def logout():
 
 
 # TODO: Show only profiles of existing users
+# TODO: Rewrite for LoginManager
 @app.route('/user/<username>')
 @app.route('/u/<username>')
 def profile(username):
@@ -49,6 +53,7 @@ def profile(username):
 
 
 # TODO: Reflect profile changes in database
+# TODO: Rewrite for LoginManager
 # Set directory for editing profiles
 @app.route('/editprofile/<username>/', methods=['GET', 'POST'])
 def editprofile(username):
@@ -56,6 +61,7 @@ def editprofile(username):
 
 
 # TODO: Register user in database
+# TODO: Rewrite for LoginManager
 # Set directory for registration
 @app.route('/register/', methods=['GET', 'POST'])
 def registration():
@@ -64,6 +70,7 @@ def registration():
     return render_template('register.html')
 
 
+# TODO: Rewrite for LoginManager
 # Set directory for changing Email
 @app.route('/editprofile/<username>/change-email/', methods=['GET', 'POST'])
 def changeEmail(username):
