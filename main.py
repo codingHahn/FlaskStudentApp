@@ -60,6 +60,7 @@ def editprofile(username):
     return render_template('editprofile.html', username=username)
 
 
+
 # TODO: Register user in database
 # TODO: Rewrite for LoginManager
 # Set directory for registration
@@ -82,6 +83,7 @@ def changeEmail(username):
 @app.route('/impressum')
 def impressum():
     return render_template('includes/_impressum.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
