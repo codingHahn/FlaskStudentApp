@@ -1,6 +1,5 @@
 from flask import  render_template, session, redirect, url_for, escape, request
-from app import app, models
-from app.forms import LoginForm
+from app import app, models, forms
 
 # TODO: GDPR compliance
 #       - cookie prefs.
@@ -29,7 +28,7 @@ def login():
         return redirect(url_for('index'))
 
     if not session.get('logged-in'):
-        form = LoginForm()
+        form = forms.LoginForm()
         return render_template('login.html', form=form)
 
     return redirect(url_for('index'))
@@ -58,7 +57,8 @@ def profile(username1):
 # Set directory for editing profiles
 @app.route('/editprofile/<username>/', methods=['GET', 'POST'])
 def editprofile(username):
-    return render_template('editprofile.html', username=username)
+    form = forms.EditProfileForm()
+    return render_template('editprofile.html', username=username, form=form)
 
 
 
