@@ -1,9 +1,10 @@
 from flask import  render_template, session, redirect, url_for, escape, request
 from app import app, models
+from app.forms import LoginForm
 
 # TODO: GDPR compliance
 #       - cookie prefs.
-#       - account deletion 
+#       - account deletion
 # TODO: Rewrite all forms with wtforms
 
 # Landing Page Logic
@@ -17,8 +18,7 @@ def index():
 
 
 # TODO: Check if user exists in database
-# TODO: Rewrite for LoginManager
-# Login logic 
+# Login logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     '''Handles login from the login-form'''
@@ -29,7 +29,8 @@ def login():
         return redirect(url_for('index'))
 
     if not session.get('logged-in'):
-        return render_template('login.html')
+        form = LoginForm()
+        return render_template('login.html', form=form)
 
     return redirect(url_for('index'))
 
