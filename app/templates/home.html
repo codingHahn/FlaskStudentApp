@@ -18,4 +18,32 @@
 </div>
 </div>
 
+<div class="dropdown">
+<button class="btn btn-secondary dropdown-toggle" type="button" id="test" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  {{username}}
+</button>
+<div class="dropdown-menu" aria-labelledby="test">
+  <a class="dropdown-item" href="/editprofile.html">Profil</a>
+  <a class="dropdown-item" href="/logout">Abmelden</a>
+</div>
+</div>
+</div>
+
+
+<div class="btn-group fakeSelect">
+  <input type="hidden" class="selectValue" value="2013">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+      <span class="currentVal">2013</span>
+      <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+      <li><a data-value="2013" href="#">2013</a></li>
+      <li><a data-value="2012" href="#">2012</a></li>
+      <li><a data-value="2011" href="#">2011</a></li>
+      <li><a data-value="2010" href="#">2010</a></li>
+      <li><a data-value="2009" href="#">2009</a></li>
+      <li><a data-value="2008" href="#">2008</a></li>
+  </ul>
+</div>
+
 {% endblock %}
