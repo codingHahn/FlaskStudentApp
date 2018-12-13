@@ -46,10 +46,10 @@ def logout():
 # TODO: Rewrite for LoginManager
 @app.route('/user/<username>')
 @app.route('/u/<username>')
-def profile(username):
-    if username == session['username']:
+def profile(username1):
+    if username1 == session['username']:
         return redirect(url_for('editprofile'))
-    return "Userprofile of " + username
+    return render_template('templates/editprofile.html', username=username1)
 
 
 # TODO: Reflect profile changes in database
