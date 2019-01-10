@@ -76,6 +76,16 @@
         <button type="submit" class="btn btn-primary mt-3">Speichern</button>
     </form>
 </div>
+<form action="" method="POST" novalidate>
+    <p>
+        {{ form.Vorname.label}}<br>
+        {{ form.Nachname.label}}
+    </p>
+    <p>
+        {{ form.email.label}}
+    </p>
+    
+</form>
 
 {% endblock %}
 
