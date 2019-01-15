@@ -14,3 +14,12 @@ class EditProfileForm(FlaskForm):
     text_area = TextAreaField('Über mich')
     school_year = SelectField('Klasse' , choices=[(7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)])
     submit = SubmitField('Änderungen Übernehmen')
+
+class RegistrationForm(FlaskForm):
+    firstname = StringField('Vorname', validators=[DataRequired()])
+    surname = StringField('Nachname', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired()])
+    password = StringField('Passwort', validators=[DataRequired()])
+    text_area = TextAreaField('Über mich')
+    school_year = SelectField('Klasse' , choices=[(7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)])
+    submit = SubmitField('Änderungen Übernehmen')

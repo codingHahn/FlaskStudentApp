@@ -69,7 +69,8 @@ def editprofile(username):
 def registration():
     if session.get('logged-in'):
         return redirect(url_for('index'))
-    return render_template('register.html')
+    form = forms.RegistrationForm()
+    return render_template('register.html', form=form)
 
 
 # TODO: Rewrite for LoginManager

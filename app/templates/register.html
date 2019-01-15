@@ -1,6 +1,33 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+
+<h1>Registrieren</h1>
+<form action="" method="post" novalidate>
+    <p>
+    {{form.firstname.label }} <br>
+    {{form.firstname(size=32) }}
+    </p>
+    <p>
+    {{form.surname.label }} <br>
+    {{form.surname(size=32) }}
+    </p>
+    <p>
+    {{form.email.label }} <br>
+    {{form.email(size=32) }}
+    </p>
+    <p>
+    {{form.password.label }} <br>
+    {{form.password(size=32) }}
+    </p>
+    <p>
+    {{form.school_year.label }} <br>
+    {{form.school_year}}
+    </p>
+</form>
+
+
+
 <div class="container">
     <h1>Registrieren</h1>
     <form method="post">
