@@ -2,22 +2,7 @@
 
 {% block body %}
 
-<form class="form-signin" method=post>
-	{{ form.hidden_tag() }}
-	<p>
-	{{ form.username.label }} <br>
-	{{ form.username(size=64) }}
-	</p>
-	<p>
-	{{ form.password.label }} <br>
-	{{ form.password(size=64) }}
-	</p>
-	<p> {{ form.remember_me() }} {{ form.remember_me.label }} </p>
-	<p>  {{ form.submit() }} </p>
-</form>
-
-
-
+<div class="signin">
 <h1>Sign in</h1>
 <form action="" method="POST novalidate">
   {{form.hidden_tag()}}
@@ -30,13 +15,13 @@
     {{form.password(size=32)}}
   </p>
   <p>
-    {{form.remember-me.label}}
+    {{form.remember_me.label}}
   </p>
   <p>
     {{form.submit() }}
   </p>
 </form>
-
+</div>
 
 
 <style>
@@ -46,41 +31,25 @@ body {
 }
 
 body {
-  display: -ms-flexbox;
-  -ms-flex-align: center;
   align-items: center;
   padding-bottom: 40px;
   background-color: #f5f5f5;
 }
 
-.form-signin {
+h1 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.signin {
   width: 100%;
   max-width: 330px;
   padding: 15px;
   margin: auto;
-}
-.form-signin .checkbox {
-  font-weight: 400;
-}
-.form-signin .form-control {
   position: relative;
-  box-sizing: border-box;
-  height: auto;
-  padding: 10px;
-  font-size: 16px;
 }
-.form-signin .form-control:focus {
-  z-index: 2;
-}
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+
+
 }
 </style>
 
