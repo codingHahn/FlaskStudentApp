@@ -2,6 +2,7 @@
 
 {% block body %}
 
+<div class="form">
 <h1>Registrieren</h1>
 <form action="" method="post" novalidate>
     <p>
@@ -24,10 +25,26 @@
     {{form.school_year.label }} <br>
     {{form.school_year}}
     </p>
+    <h4>Fächer</h4>
+    <p class="no-margin">
+    {{form.subject_latin.label }}
+    {{form.subject_latin(size=32)}}
+    </p>
+    <p class="no-margin">
+    {{form.subject_english.label }}
+    {{form.subject_english(size=32)}}
+    </p>
+    <p class="no-margin">
+    {{form.subject_math.label }}
+    {{form.subject_math(size=32)}}
+    </p>
+    <p>
+    {{form.submit}}
+    </p>
 </form>
+</div>
 
-
-
+<!-- ohne WTForms geschrieben, deshalb erstmal nicht mehr benötigt
 <div class="container">
     <h1>Registrieren</h1>
     <form method="post">
@@ -95,5 +112,19 @@
         <button type="submit" class="btn btn-primary mt-2">Registrieren</button>
     </form>
 </div>
-
+-->
+<style>
+   html, body {
+       height: 101%;
+       align-items: center;
+       padding-bottom: 40px;
+   }
+   .form {
+    position: relative;
+    margin-left: 15.625em;
+   }
+   .no-margin {
+       margin: 0px;
+   }
+</style>
 {% endblock %}
