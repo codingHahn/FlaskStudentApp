@@ -2,16 +2,28 @@
 <html>
     <head>
 	<meta charset="utf-8">
+	{% if title %}
+	<title> {{ title }} - MyFlaskApp</title>
+	{% else %}
 	<title>MyFlaskApp</title>
+	{% endif %}
 	<link rel="stylesheet" href="/static/css/bootstrap.css">
     </head>
 	<body>
 	<div class="h-100">
 		{% include 'includes/_navbar.html' %}
 		
-		<div>
-			{% block body %} {% endblock %}
-		</div>
+		<hr>
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		<ul>
+			{% for message in messages %}
+			<li>{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		{% endwith %}
+		{% block body %} {% endblock %}
 		<script src="/static/js/bootstrap.bundle.min.js"></script>
 	</div>
 	</body>

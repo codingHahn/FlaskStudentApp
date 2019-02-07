@@ -1,4 +1,4 @@
-from flask import  render_template, session, redirect, url_for, escape, request
+from flask import  render_template, session, redirect, url_for, escape, request, flash, url_for
 from app import app, models, forms
 
 # TODO: GDPR compliance
@@ -20,7 +20,15 @@ def index():
 # Login logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    '''Handles login from the login-form'''
+    form = forms.LoginForm()
+    if form.validate_on_submit():
+        #The Flash function shows the user a message
+        flash('Login requested for user {}, remember_me={}'.format(form.username.data, form.remember_me.data))
+        return redirect(url_for('index'))
+    return render_template('login.html', title='Sign In', form=form)
+
+
+    '''Handles login from the login-form
     if request.method == 'POST':
         session['username'] = request.form['username']
         print(request.form.get('remember'))
@@ -30,7 +38,7 @@ def login():
     if not session.get('logged-in'):
         form = forms.LoginForm()
         return render_template('login.html', form=form)
-
+    '''
     return redirect(url_for('index'))
 
 
@@ -46,8 +54,8 @@ def logout():
 # TODO: Rewrite for LoginManager
 @app.route('/user/<username>')
 @app.route('/u/<username>')
-def profile(username1):
-    if username1 == session['username']:
+def profile(username):
+    if username == session['username']:
         return redirect(url_for('editprofile'))
     return render_template('templates/editprofile.html', username=username1)
 
