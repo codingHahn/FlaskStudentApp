@@ -11,10 +11,9 @@ from app import app, models, forms
 @app.route('/index')
 def index():
     '''Checks if the user is logged in and ajusts the user variable accordingly'''
-    nav = forms.Nav()
     if 'username' in session:
         return render_template('home.html', username=escape(session['username']))
-    return render_template('home.html', username='nobody', nav=nav)
+    return render_template('home.html', username='nobody')
 
 
 
@@ -24,12 +23,11 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = forms.LoginForm()
-    nav = forms.Nav()
     if form.validate_on_submit():
         #The Flash function shows the user a message
         flash('Login requested for user {}, remember_me={}'.format(form.username.data, form.remember_me.data))
         return redirect(url_for('index'))
-    return render_template('login.html', title='Sign In', form=form, nav=nav)
+    return render_template('login.html', title='Sign In', form=form)
 
 
     '''Handles login from the login-form
@@ -59,10 +57,9 @@ def logout():
 @app.route('/user/<username>')
 @app.route('/u/<username>')
 def profile(username):
-    nav = forms.Nav()
     if username == session['username']:
         return redirect(url_for('editprofile'))
-    return render_template('templates/editprofile.html', username=username1, nav=nav)
+    return render_template('templates/editprofile.html', username=username)
 
 
 # TODO: Reflect profile changes in database
@@ -70,9 +67,8 @@ def profile(username):
 # Set directory for editing profiles
 @app.route('/editprofile/', methods=['GET', 'POST'])
 def editprofile(username):
-    nav = forms.Nav()
     form = forms.EditProfileForm()
-    return render_template('editprofile.html', username=username, form=form, nav=nav)
+    return render_template('editprofile.html', username=username, form=form)
 
 
 
@@ -84,27 +80,19 @@ def registration():
     if session.get('logged-in'):
         return redirect(url_for('index'))
     form = forms.RegistrationForm()
-    nav = forms.Nav()
-    return render_template('register.html', form=form, nav=nav)
+    return render_template('register.html', form=form)
 
 
 # TODO: Rewrite for LoginManager
 # Set directory for changing Email
 @app.route('/editprofile/<username>/change-email/', methods=['GET', 'POST'])
 def changeEmail(username):
-    return render_template('change-email.html', username=username, nav=nav)
+    return render_template('change-email.html', username=username)
 
 
 @app.route('/impressum')
 def impressum():
-    nav = forms.Nav()
-    return render_template('includes/_impressum.html', nav=nav)
-
-def dropdown():
-    nav = forms.Nav()
-    
-    #if nav.dropdown.data = 1:
-       #return redirect(url_for('editprofile'))
+    return render_template('includes/_impressum.html')
 
 
 if __name__ == '__main__':
