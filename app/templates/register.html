@@ -8,39 +8,64 @@
     <p>
     {{form.firstname.label }} <br>
     {{form.firstname(size=32) }}
+    {% for error in form.firstname.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
     </p>
     <p>
     {{form.surname.label }} <br>
     {{form.surname(size=32) }}
+    {% for error in form.surname.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
     </p>
     <p>
     {{form.email.label }} <br>
     {{form.email(size=32) }}
+    {% for error in form.email.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
     </p>
     <p>
     {{form.password.label }} <br>
     {{form.password(size=32) }}
+    {% for error in form.password.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
     </p>
     <p>
     {{form.school_year.label }} <br>
     {{form.school_year}}
+    {% for error in form.school_year.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
     </p>
     <h4>Fächer</h4>
     <p class="no-margin">
     {{form.subject_latin.label }}
     {{form.subject_latin(size=32)}}
+    {% for error in form.subject_english.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
     </p>
     <p class="no-margin">
     {{form.subject_english.label }}
     {{form.subject_english(size=32)}}
+    {% for error in form.subject_english.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
     </p>
     <p class="no-margin">
     {{form.subject_math.label }}
     {{form.subject_math(size=32)}}
+    {% for error in form.subject_math.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
     </p>
     <p>
     {{form.submit}}
     </p>
+    {{ form.csrf_token }}
 </form>
 </div>
 
