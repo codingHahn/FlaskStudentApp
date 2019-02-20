@@ -1,10 +1,11 @@
 from flask import  render_template, session, redirect, url_for, escape, request, flash, url_for
-from app import app, models, forms
+from flask_login import current_user, login_user
+from app import app, models, forms, db
+from app.models import User
 
 # TODO: GDPR compliance
 #       - cookie prefs.
 #       - account deletion
-# TODO: Rewrite all forms with wtforms
 
 # Landing Page Logic
 @app.route('/')
@@ -16,14 +17,20 @@ def index():
     return render_template('home.html', username='nobody')
 
 
-# TODO: Check if user exists in database
 # Login logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     form = forms.LoginForm()
     if form.validate_on_submit():
-        #The Flash function shows the user a message
-        flash('Login requested for user {}, remember_me={}'.format(form.username.data, form.remember_me.data))
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('index'))
+        login_user(user, remember=form.remember_me.data)
+        
+        flash('Login requested for user {}, remember_me={}'.format(form.email.data, form.remember_me.data))
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
 
@@ -70,16 +77,25 @@ def editprofile(username):
 
 
 
-# TODO: Register user in database
-# TODO: Rewrite for LoginManager
 # Set directory for registration
-@app.route('/register/', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def registration():
-    if session.get('logged-in'):
+
+    form = forms.RegistrationForm()
+    if form.validate_on_submit():
+        u = User(firstname=form.firstname.data, surname=form.surname.data, email=form.email.data)
+        u.set_password(form.password.data)
+        db.session.add(u)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('register.html', form=form)
+
+
+    '''if session.get('logged-in'):
         return redirect(url_for('index'))
     form = forms.RegistrationForm()
     return render_template('register.html', form=form)
-
+'''
 
 # TODO: Rewrite for LoginManager
 # Set directory for changing Email
