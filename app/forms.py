@@ -15,6 +15,11 @@ class EditProfileForm(FlaskForm):
     school_year = SelectField('Klasse', choices=[(7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)])
     submit = SubmitField('Änderungen Übernehmen')
 
+class EditEmailForm(FlaskForm):
+    new_mail = StringField('Neue Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Passwort', validators=[DataRequired()])
+    submit = SubmitField('Änderungen Übernehmen')
+
 class RegistrationForm(FlaskForm):
     firstname = StringField('Vorname', validators=[DataRequired()])
     surname = StringField('Nachname', validators=[DataRequired()])

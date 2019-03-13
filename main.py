@@ -1,5 +1,6 @@
-from flask import  render_template, session, redirect, url_for, escape, request, flash, url_for
-from flask_login import current_user, login_user
+from flask import  render_template, session, redirect, url_for, escape, request, flash
+from flask_login import current_user, login_user, logout_user, login_required
+from werkzeug.urls import url_parse
 from app import app, models, forms, db
 from app.models import User
 
@@ -29,31 +30,21 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('index'))
         login_user(user, remember=form.remember_me.data)
-        
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('index') 
         flash('Login requested for user {}, remember_me={}'.format(form.email.data, form.remember_me.data))
-        return redirect(url_for('index'))
+        return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
-
-
-    '''Handles login from the login-form
-    if request.method == 'POST':
-        session['username'] = request.form['username']
-        print(request.form.get('remember'))
-        session['logged-in'] = True
-        return redirect(url_for('index'))
-
-    if not session.get('logged-in'):
-        form = forms.LoginForm()
-        return render_template('login.html', form=form)
-    '''
-    return redirect(url_for('index'))
-
 
 # TODO: Rewrite for LoginManager
 @app.route('/logout')
 def logout():
-    session.pop("username", None)
-    session.pop('logged-in', None)
+    if current_user.is_authenticated:
+        logout_user()
+        return redirect(url_for('index'))
+
+    flash("You are currently not logged in.")
     return redirect(url_for('index'))
 
 
@@ -70,6 +61,7 @@ def profile(username):
 # TODO: Reflect profile changes in database
 # TODO: Rewrite for LoginManager
 # Set directory for editing profiles
+@login_required
 @app.route('/editprofile/<username>/', methods=['GET', 'POST'])
 def editprofile(username):
     form = forms.EditProfileForm()
@@ -90,18 +82,15 @@ def registration():
         return redirect(url_for('index'))
     return render_template('register.html', form=form)
 
-
-    '''if session.get('logged-in'):
-        return redirect(url_for('index'))
-    form = forms.RegistrationForm()
-    return render_template('register.html', form=form)
-'''
-
 # TODO: Rewrite for LoginManager
 # Set directory for changing Email
-@app.route('/editprofile/<username>/change-email/', methods=['GET', 'POST'])
-def changeEmail(username):
-    return render_template('change-email.html', username=username)
+@app.route('/change-email', methods=['GET', 'POST'])
+@login_required
+def changeEmail():
+    form = forms.EditEmailForm()
+    if form.validate_on_submit:
+        current_user.email = form.email.data
+    return render_template('change-email.html', username=current_user.firstname)
 
 
 # TODO: Write impressum
