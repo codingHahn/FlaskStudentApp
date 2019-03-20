@@ -7,6 +7,8 @@ tags
 __pycache__/
 *.py[cod]
 *$py.class
+# VSCODE stuff
+.vscode/
 
 # C extensions
 *.so

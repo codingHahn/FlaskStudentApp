@@ -25,6 +25,14 @@
         {% else %}
         
       </li>
+      <li>
+        <select onchange="change(this.value)">
+          <option selected disabled hidden>user</option>
+          <option value="{{url_for('editprofile')}}">Profil</option>
+          <option value="/logout">Abmelden</option>
+        </select>
+      </li>
+
     </ul>
     <ul class="navbar-nav">
         <li class="nav-item active">
@@ -41,9 +49,11 @@
       {% endif %}
 </nav>
 <script>
+
 function change(src)
 {
 
   window.location=src;
 }
+
 </script>
