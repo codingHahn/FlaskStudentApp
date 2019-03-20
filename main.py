@@ -13,8 +13,8 @@ from app.models import User
 @app.route('/index')
 def index():
     '''Checks if the user is logged in and ajusts the user variable accordingly'''
-    if 'username' in session:
-        return render_template('home.html', username=escape(session['username']))
+    if current_user.is_authenticated:
+        return render_template('home.html', username=current_user.surname)
     return render_template('home.html', username='nobody')
 
   
@@ -61,10 +61,10 @@ def profile(username):
 # TODO: Rewrite for LoginManager
 # Set directory for editing profiles
 @login_required
-@app.route('/editprofile/<username>/', methods=['GET', 'POST'])
-def editprofile(username):
+@app.route('/editprofile/', methods=['GET', 'POST'])
+def editprofile():
     form = forms.EditProfileForm()
-    return render_template('editprofile.html', username=username, form=form)
+    return render_template('editprofile.html', user=current_user, form=form)
 
 
 
