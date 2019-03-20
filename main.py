@@ -17,7 +17,7 @@ def index():
         return render_template('home.html', username=escape(session['username']))
     return render_template('home.html', username='nobody')
 
-
+  
 # Login logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -55,12 +55,13 @@ def logout():
 def profile(username):
     if username == session['username']:
         return redirect(url_for('editprofile'))
-    return render_template('templates/editprofile.html', username=username1)
+    return render_template('templates/editprofile.html', username=username)
 
 
 # TODO: Reflect profile changes in database
 # TODO: Rewrite for LoginManager
 # Set directory for editing profiles
+
 @login_required
 @app.route('/editprofile/<username>/', methods=['GET', 'POST'])
 def editprofile(username):
@@ -93,8 +94,6 @@ def changeEmail():
     return render_template('change-email.html', username=current_user.firstname)
 
 
-# TODO: Write impressum
-# Add impressum.html
 @app.route('/impressum')
 def impressum():
     return render_template('includes/_impressum.html')

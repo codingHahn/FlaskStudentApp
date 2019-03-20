@@ -31,3 +31,7 @@ class RegistrationForm(FlaskForm):
     subject_math = BooleanField('Mathe')
     subject_english = BooleanField('Englisch')
     submit = SubmitField('Registrieren')
+
+class Nav(FlaskForm):
+    dropdown = SelectField('Dropdown', choices=[(0, '' ), (1, 'Profil'), (2, 'News'), (3, 'Abmelden')])
+
