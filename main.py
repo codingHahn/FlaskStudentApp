@@ -21,10 +21,9 @@ def index():
 # Login logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
     form = forms.LoginForm()
     if form.validate_on_submit():
+
         user = User.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
@@ -61,7 +60,6 @@ def profile(username):
 # TODO: Reflect profile changes in database
 # TODO: Rewrite for LoginManager
 # Set directory for editing profiles
-
 @login_required
 @app.route('/editprofile/<username>/', methods=['GET', 'POST'])
 def editprofile(username):
@@ -73,7 +71,6 @@ def editprofile(username):
 # Set directory for registration
 @app.route('/register', methods=['GET', 'POST'])
 def registration():
-
     form = forms.RegistrationForm()
     if form.validate_on_submit():
         u = User(firstname=form.firstname.data, surname=form.surname.data, email=form.email.data)
