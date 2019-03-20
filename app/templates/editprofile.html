@@ -1,9 +1,10 @@
 {% extends 'layout.html' %}
 {% block body %}
 <div class="container">
-    <h1>Profil von {{username}}</h1>
+	<h1>Profil von {{user.firstname}} {{user.surname}}</h1>
     <form method="post">
 	    {{ form.hidden_tag() }}
+	    {{ form.csrf_token }}
 	    <p>
 	    {{ form.firstname.label}} <br>
 	    {{ form.firstname(size=32) }} 
@@ -13,7 +14,7 @@
 	    {{ form.surname(size=32) }}
 	    </p>
             <div class="col-sm-2 col-form-label" id="toggleMail">
-                <a href="/editprofile/{{username}}/change-email"><div class="d-inline"><small>Change Email</small></div></a>
+                <a href="/change-email"><div class="d-inline"><small>Change Email</small></div></a>
             </div>
         </div>
 	<p>
@@ -60,16 +61,6 @@
         <button type="submit" class="btn btn-primary mt-3">Speichern</button>
     </form>
 </div>
-<form action="" method="POST" novalidate>
-    <p>
-        {{ form.Vorname.label}}<br>
-        {{ form.Nachname.label}}
-    </p>
-    <p>
-        {{ form.email.label}}
-    </p>
-    
-</form>
 
 {% endblock %}
 
