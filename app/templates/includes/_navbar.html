@@ -13,7 +13,17 @@
 	<a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-	<a class="nav-link" href="{{ url_for('login') }}">Login</a>
+        {% if current_user.is_anonymus %}
+          <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+          <li class="nav-item active">
+    <a class="nav-link" href="{{ url_for('registration') }} ">Register</a>
+            </li>
+        </ul>
+        {% else %}
+        
       </li>
     </ul>
     <ul class="navbar-nav">
@@ -21,23 +31,19 @@
 	<a class="nav-link" href="{{ url_for('registration') }} ">Register</a>
           </li>
           <li class="pt-1">
-            <select onchange="change(this.value)">
-              <option selected disabled hidden>user</option>
-              <option value="{{url_for('editprofile')}}">Profil</option>
-              <option value="/logout">Abmelden</option>
-            </select>
-          </li>
-    </ul>
-     
-    
-
-      
-     
+              <select onchange="change(this.value)">
+                <option selected disabled hidden>user</option>
+                <option value="{{url_for('editprofile')}}">Profil</option>
+                <option value="{{ url_for('logout')}}">Abmelden</option>
+              </select>
+            </li>
+      </ul>
+      {% endif %}
 </nav>
 <script>
-  function change(src)
-  {
+function change(src)
+{
 
-      window.location=src;
-  }
+  window.location=src;
+}
 </script>
