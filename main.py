@@ -92,7 +92,7 @@ def changeEmail():
     form = forms.EditEmailForm()
     #if form.validate_on_submit:
        # current_user.email = form.email.data
-    return render_template('change-email.html', username=current_user.firstname)
+    return render_template('change-email.html', username=current_user.firstname, form=form)
 
 
 @app.route('/impressum')
