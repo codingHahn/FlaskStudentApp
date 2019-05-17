@@ -11,6 +11,10 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(256))
 
+    has_english = db.Column(db.Boolean, index=True)
+    has_latin = db.Column(db.Boolean, index=True)
+    has_math = db.Column(db.Boolean, index=True)
+
     #name = db.Column(db.String(64))
     #surname = db.Column(db.String(64))
 
@@ -23,7 +27,7 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)    
+        return '<User {}>'.format(self.id)    
 
 @login.user_loader
 def load_user(id):
