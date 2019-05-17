@@ -11,8 +11,12 @@ class LoginForm(FlaskForm):
 class EditProfileForm(FlaskForm):
     firstname = StringField('Vorname')
     surname = StringField('Nachname')
+    email = StringField('Email', validators=[DataRequired(), Email()])
     text_area = TextAreaField('Über mich')
     school_year = SelectField('Klasse', choices=[(7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)])
+    subject_latin = BooleanField('Latein')
+    subject_math = BooleanField('Mathe')
+    subject_english = BooleanField('Englisch')
     submit = SubmitField('Änderungen Übernehmen')
 
 class EditEmailForm(FlaskForm):

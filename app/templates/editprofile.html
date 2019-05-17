@@ -1,7 +1,9 @@
 {% extends 'layout.html' %}
 {% block body %}
 <div class="container">
-	<h1>Profil von {{user.firstname}} {{user.surname}}</h1>
+
+    <h1>Profil von {{ current_user.firstname}} {{ current_user.surname }}</h1>
+
     <form method="post">
 	    {{ form.hidden_tag() }}
 	    {{ form.csrf_token }}
@@ -10,60 +12,63 @@
 	    {{ form.firstname(size=32) }} 
 	    </p>
 	    <p>
-	    {{ form.surname.label }}
+	    {{ form.surname.label }} <br>
 	    {{ form.surname(size=32) }}
 	    </p>
-            <div class="col-sm-2 col-form-label" id="toggleMail">
-		    <a href="{{ url_for('changeEmail') }}"><div class="d-inline"><small>Change Email</small></div></a>
-            </div>
-        </div>
 	<p>
 	{{ form.school_year.label }} <br>
 	{{ form.school_year() }}
-	</p>
-        <div class="form-group row my-1 pb-2 pt-2">
-            <label class="col-sm-2" for="inlineFormCustomSelect">Alter:</label>
-            <select class="custom-select mr-sm-2 col-sm-2" id="inlineFormCustomSelect">
-                <option selected>Auswählen</option>
-                <option value="0">11</option>
-                <option value="1">12</option>
-                <option value="2">13</option>
-                <option value="3">14</option>
-                <option value="4">15</option>
-                <option value="5">16</option>
-                <option value="6">17</option>
-                <option value="7">18</option>
-                <option value="8">19</option>
-                <option value="9">20</option>
-            </select>
-        </div>
+    </p>    
         <div class="row pb-2 pt-2">
             <div class="col-sm-2">Fach/Fächer:</div>
-            <div class="col-sm-10">
-                <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="LatinCheck">
-                <label class="form-check-label" for="LatinCheck">Latein</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="MathCheck">
-                    <label class="form-check-label" for="MathCheck">Mathe</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="EnglishCheck">
-                    <label class="form-check-label" for="EnglishCheck">Englisch</label>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <p class="no-margin">
+                            {{form.subject_latin(size=32)}}
+                            {{form.subject_latin.label }}
+                            {% for error in form.subject_english.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </p>
+                    </div>
+                    <div class="form-check">
+                        <p class="no-margin">
+                            {{form.subject_english(size=32)}}
+                            {{form.subject_english.label }}
+                            {% for error in form.subject_english.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </p>
+                    </div>
+                    <div class="form-check">
+                        <p class="no-margin">
+                            {{form.subject_math(size=32)}}
+                            {{form.subject_math.label }}
+                            {% for error in form.subject_math.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
         <div>
-            <label for="optional">(Optional): Text über mich</label>
-            <textarea class="form-control col-6" id="optional"></textarea>
+            <p>
+                {{form.text_area.label}} <br>
+                {{form.text_area}}
+            </p>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Speichern</button>
+        <p class="pt-2">
+            {{form.submit}}
+        </p>
+                {{ form.csrf_token }}
     </form>
 </div>
 
 {% endblock %}
 
 <style>
-
+html,
+body {
+    height: 98%;
+}
 </style>

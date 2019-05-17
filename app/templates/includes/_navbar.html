@@ -13,7 +13,7 @@
 	<a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        {% if current_user.is_anonymus %}
+        {% if current_user.is_anonymous %}
           <a class="nav-link" href="{{ url_for('login') }}">Login</a>
         </li>
       </ul>
@@ -25,23 +25,13 @@
         {% else %}
         
       </li>
-      <li>
-        <select onchange="change(this.value)">
-          <option selected disabled hidden>user</option>
-          <option value="{{url_for('editprofile')}}">Profil</option>
-          <option value="/logout">Abmelden</option>
-        </select>
-      </li>
 
     </ul>
     <ul class="navbar-nav">
-        <li class="nav-item active">
-	<a class="nav-link" href="{{ url_for('registration') }} ">Register</a>
-          </li>
           <li class="pt-1">
               <select onchange="change(this.value)">
-                <option selected disabled hidden>user</option>
-                <option value="{{url_for('editprofile')}}">Profil</option>
+                <option selected hidden> {{ current_user.surname }}</option>
+                <option value="{{url_for('profile')}}">Profil</option>
                 <option value="{{ url_for('logout')}}">Abmelden</option>
               </select>
             </li>

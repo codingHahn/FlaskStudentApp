@@ -4,6 +4,7 @@
 
 <div class="form">
 <h1>Registrieren</h1>
+<p>Alle Felder sind Pflichtfelder.</p>
 <form action="" method="post" novalidate>
     <p>
     {{form.firstname.label }} <br>
@@ -43,21 +44,21 @@
     <h4>Fächer</h4>
     <p class="no-margin">
     {{form.subject_latin.label }}
-    {{form.subject_latin(size=32)}}
+    <span class="pl-4">{{form.subject_latin(size=32)}}</span>
     {% for error in form.subject_english.errors %}
     <span style="color: red;">[{{ error }}]</span>
     {% endfor %}
     </p>
     <p class="no-margin">
     {{form.subject_english.label }}
-    {{form.subject_english(size=32)}}
+    <span class="pl-2">{{form.subject_english(size=32)}}</span>
     {% for error in form.subject_english.errors %}
     <span style="color: red;">[{{ error }}]</span>
     {% endfor %}
     </p>
     <p class="no-margin">
     {{form.subject_math.label }}
-    {{form.subject_math(size=32)}}
+    <span class="pl-4">{{form.subject_math(size=32)}}</span>
     {% for error in form.subject_math.errors %}
     <span style="color: red;">[{{ error }}]</span>
     {% endfor %}

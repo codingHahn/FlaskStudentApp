@@ -50,20 +50,25 @@ def logout():
 
 # TODO: Show only profiles of existing users
 # TODO: Rewrite for LoginManager
+
 @login_required
 @app.route('/user')
 def profile():
-    return redirect(url_for('editprofile'))
+    return render_template('profile.html', user=current_user)
+
 
 
 # TODO: Reflect profile changes in database
 # TODO: Rewrite for LoginManager
 # Set directory for editing profiles
+
+
 @login_required
 @app.route('/editprofile/', methods=['GET', 'POST'])
 def editprofile():
     form = forms.EditProfileForm()
-    return render_template('editprofile.html', user=current_user, form=form)
+    return render_template('editprofile.html', form=form)
+
 
 
 # Set directory for registration
@@ -80,19 +85,19 @@ def registration():
 
 # TODO: Rewrite for LoginManager
 # Set directory for changing Email
+
 @login_required
 @app.route('/change-email/', methods=['GET', 'POST'])
 def changeEmail():
     form = forms.EditEmailForm()
-    if form.validate_on_submit:
-        current_user.email = form.email.data
+    #if form.validate_on_submit:
+       # current_user.email = form.email.data
     return render_template('change-email.html', username=current_user.firstname)
 
 
 @app.route('/impressum')
 def impressum():
     return render_template('includes/_impressum.html')
-
 
 if __name__ == '__main__':
     app.run(debug=True)
