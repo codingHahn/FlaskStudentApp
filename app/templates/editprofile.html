@@ -14,7 +14,7 @@
 	    {{ form.surname(size=32) }}
 	    </p>
             <div class="col-sm-2 col-form-label" id="toggleMail">
-                <a href="/change-email"><div class="d-inline"><small>Change Email</small></div></a>
+		    <a href="{{ url_for('changeEmail') }}"><div class="d-inline"><small>Change Email</small></div></a>
             </div>
         </div>
 	<p>
