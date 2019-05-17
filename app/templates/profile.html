@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+    <h3>Profil von {{ current_user.firstname }} {{ current_user.surname }} </h3>
+    <h5>Name</h5>
+    <p> {{ current_user.firstname }} {{ current_user.surname }}</p>
+    <h5>Email</h5>
+    <div class="form-inline">
+    <p class="mb-0"> {{ current_user.email }} </p>
+    <div class="col-sm-2 col-form-label" id="toggleMail">
+            <a href="{{ url_for('changeEmail') }}"><div class="d-inline"><small>Change Email</small></div></a>
+    </div>
+    </div>
+    <a href= "{{url_for('editprofile')}}"<button type="link" class="btn btn-primary mt-3">Profil Bearbeiten</button></a>
+</div>
+
+<style>
+html,
+body {
+  height: 98.5%;
+  
+}
+
+</style>
+{% endblock %}
