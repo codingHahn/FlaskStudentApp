@@ -91,9 +91,16 @@ def registration():
 @app.route('/change-email/', methods=['GET', 'POST'])
 def changeEmail():
     form = forms.EditEmailForm()
-    #if form.validate_on_submit:
-       # current_user.email = form.email.data
-    return render_template('change-email.html', username=current_user.firstname, form=form)
+    if form.validate_on_submit:
+        if form.password.data is not None:
+            if current_user.check_password(form.password.data):
+                current_user.change_email(form.email.data)
+                db.session.add(current_user)
+                db.session.commit()
+                return redirect(url_for("profile"))
+            else:
+                flash("Invalid Password")
+    return render_template('change-email.html', form=form)
 
 
 @app.route('/impressum')
