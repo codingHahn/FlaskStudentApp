@@ -23,15 +23,16 @@ def index():
 def login():
     form = forms.LoginForm()
     if form.validate_on_submit():
-
         user = User.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('index'))
+
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('index') 
+
         flash('Login requested for user {}, remember_me={}'.format(form.email.data, form.remember_me.data))
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
@@ -49,13 +50,12 @@ def logout():
 
 # TODO: Show only profiles of existing users
 # TODO: Rewrite for LoginManager
-@app.route('/user/<username>')
-@app.route('/u/username/')
-def profile(username):
-    user = User.query.filter_by(username=username).first_or_404()
-    #if username == session['username']:
-       # return redirect(url_for('editprofile'))
-    return render_template('profile.html', user=user)
+
+@login_required
+@app.route('/user')
+def profile():
+    return render_template('profile.html', user=current_user)
+
 
 
 # TODO: Reflect profile changes in database
@@ -68,7 +68,6 @@ def profile(username):
 def editprofile():
     form = forms.EditProfileForm()
     return render_template('editprofile.html', form=form)
-
 
 
 
@@ -86,8 +85,9 @@ def registration():
 
 # TODO: Rewrite for LoginManager
 # Set directory for changing Email
-@app.route('/change-email/', methods=['GET', 'POST'])
+
 @login_required
+@app.route('/change-email/', methods=['GET', 'POST'])
 def changeEmail():
     form = forms.EditEmailForm()
     #if form.validate_on_submit:

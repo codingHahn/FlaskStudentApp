@@ -20,7 +20,7 @@ class EditProfileForm(FlaskForm):
     submit = SubmitField('Änderungen Übernehmen')
 
 class EditEmailForm(FlaskForm):
-    new_mail = StringField('Neue Email', validators=[DataRequired(), Email()])
+    email = StringField('Neue Email', validators=[DataRequired(), Email()])
     password = PasswordField('Passwort', validators=[DataRequired()])
     submit = SubmitField('Änderungen Übernehmen')
 
