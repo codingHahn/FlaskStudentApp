@@ -13,8 +13,8 @@ from app.models import User
 @app.route('/index')
 def index():
     '''Checks if the user is logged in and ajusts the user variable accordingly'''
-    if 'username' in session:
-        return render_template('home.html', username=escape(session['username']))
+    if current_user.is_authenticated:
+        return render_template('home.html', username=current_user.surname)
     return render_template('home.html', username='nobody')
 
   
@@ -68,6 +68,7 @@ def profile(username):
 def editprofile():
     form = forms.EditProfileForm()
     return render_template('editprofile.html', form=form)
+
 
 
 

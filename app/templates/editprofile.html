@@ -1,9 +1,12 @@
 {% extends 'layout.html' %}
 {% block body %}
 <div class="container">
+
     <h1>Profil von {{ current_user.firstname}} {{ current_user.surname }}</h1>
+
     <form method="post">
 	    {{ form.hidden_tag() }}
+	    {{ form.csrf_token }}
 	    <p>
 	    {{ form.firstname.label}} <br>
 	    {{ form.firstname(size=32) }} 
@@ -12,7 +15,6 @@
 	    {{ form.surname.label }} <br>
 	    {{ form.surname(size=32) }}
 	    </p>
-        
 	<p>
 	{{ form.school_year.label }} <br>
 	{{ form.school_year() }}
@@ -61,7 +63,6 @@
                 {{ form.csrf_token }}
     </form>
 </div>
-
 
 {% endblock %}
 
