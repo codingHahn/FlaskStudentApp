@@ -91,11 +91,9 @@ def registration():
 @app.route('/change-email/', methods=['GET', 'POST'])
 def changeEmail():
     form = forms.EditEmailForm()
-    if form.validate_on_submit:
-        current_user.change_email(form.email.data)
-        db.session.add(current_user)
-        db.session.commit()
-    return render_template('change-email.html', username=current_user.firstname)
+    #if form.validate_on_submit:
+       # current_user.email = form.email.data
+    return render_template('change-email.html', username=current_user.firstname, form=form)
 
 
 @app.route('/impressum')
