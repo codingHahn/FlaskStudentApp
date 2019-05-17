@@ -18,6 +18,8 @@ class User(UserMixin, db.Model):
     #name = db.Column(db.String(64))
     #surname = db.Column(db.String(64))
 
+    def change_email(self, new_email):
+        self.email = new_email
     
 
     def set_password(self, password):

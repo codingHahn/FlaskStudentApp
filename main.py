@@ -76,7 +76,8 @@ def editprofile():
 def registration():
     form = forms.RegistrationForm()
     if form.validate_on_submit():
-        u = User(firstname=form.firstname.data, surname=form.surname.data, email=form.email.data)
+        u = User(firstname=form.firstname.data, surname=form.surname.data, email=form.email.data, has_english=form.subject_english.data,
+                has_latin=form.subject_latin.data, has_math=form.subject_math.data)
         u.set_password(form.password.data)
         db.session.add(u)
         db.session.commit()
@@ -90,8 +91,10 @@ def registration():
 @app.route('/change-email/', methods=['GET', 'POST'])
 def changeEmail():
     form = forms.EditEmailForm()
-    #if form.validate_on_submit:
-       # current_user.email = form.email.data
+    if form.validate_on_submit:
+        current_user.change_email(form.email.data)
+        db.session.add(current_user)
+        db.session.commit()
     return render_template('change-email.html', username=current_user.firstname)
 
 
