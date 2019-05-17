@@ -12,10 +12,12 @@ from app.models import User
 @app.route('/')
 @app.route('/index')
 def index():
+    form = forms.LoginForm()
     '''Checks if the user is logged in and ajusts the user variable accordingly'''
     if current_user.is_authenticated:
-        return render_template('home.html', username=current_user.surname)
-    return render_template('home.html', username='nobody')
+        form = forms.LoginForm()
+        return render_template('home.html', username=current_user.surname, form=form)
+    return render_template('home.html', username='nobody', form=form)
 
   
 # Login logic
