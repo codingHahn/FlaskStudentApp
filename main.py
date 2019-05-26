@@ -56,7 +56,8 @@ def logout():
 @login_required
 @app.route('/user')
 def profile():
-    return render_template('profile.html', user=current_user)
+    form = forms.EditProfileForm()
+    return render_template('profile.html', user=current_user, form=form)
 
 
 
@@ -69,6 +70,8 @@ def profile():
 @app.route('/editprofile/', methods=['GET', 'POST'])
 def editprofile():
     form = forms.EditProfileForm()
+    if form.validate_on_submit():
+        return redirect(url_for('profile'))
     return render_template('editprofile.html', form=form)
 
 

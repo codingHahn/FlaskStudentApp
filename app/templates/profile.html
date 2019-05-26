@@ -12,6 +12,49 @@
             <a href="{{ url_for('changeEmail') }}"><div class="d-inline"><small>Change Email</small></div></a>
     </div>
     </div>
+    <h5>Fächer:</h5>
+    <div class="row">
+        <p>
+            <div class="col-1">
+                {{form.subject_latin.label}}
+            </div>
+            <div class="col-sm">
+                
+            </div>
+    {% for error in form.subject_latin.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    </p>
+    {% endfor %}
+  </div>
+
+  <div class="row">
+        <p>
+            <div class="col-1">
+                {{form.subject_english.label}}
+            </div>
+            <div class="col-sm">
+                {{form.subject_english(size=32)}}
+            </div>
+    {% for error in form.subject_english.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    </p>
+    {% endfor %}
+  </div>
+
+  <div class="row">
+    <p>
+        <div class="col-1">
+            {{form.subject_math.label}}
+        </div>
+        <div class="col-sm">
+            {{form.subject_math(size=32)}}
+        </div>
+    {% for error in form.subject_math.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    </p>
+    {% endfor %}
+  </div>
+
     <a href= "{{url_for('editprofile')}}"<button type="link" class="btn btn-primary mt-3">Profil Bearbeiten</button></a>
 </div>
 
