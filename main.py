@@ -12,10 +12,12 @@ from app.models import User
 @app.route('/')
 @app.route('/index')
 def index():
+    form = forms.LoginForm()
     '''Checks if the user is logged in and ajusts the user variable accordingly'''
     if current_user.is_authenticated:
-        return render_template('home.html', username=current_user.surname)
-    return render_template('home.html', username='nobody')
+        form = forms.LoginForm()
+        return render_template('home.html', username=current_user.surname, form=form)
+    return render_template('home.html', username='nobody', form=form)
 
   
 # Login logic
@@ -54,7 +56,8 @@ def logout():
 @login_required
 @app.route('/user')
 def profile():
-    return render_template('profile.html', user=current_user)
+    form = forms.EditProfileForm()
+    return render_template('profile.html', user=current_user, form=form)
 
 
 
@@ -67,6 +70,8 @@ def profile():
 @app.route('/editprofile/', methods=['GET', 'POST'])
 def editprofile():
     form = forms.EditProfileForm()
+    if form.validate_on_submit():
+        return redirect(url_for('profile'))
     return render_template('editprofile.html', form=form)
 
 
@@ -92,7 +97,7 @@ def changeEmail():
     form = forms.EditEmailForm()
     #if form.validate_on_submit:
        # current_user.email = form.email.data
-    return render_template('change-email.html', username=current_user.firstname)
+    return render_template('change-email.html', username=current_user.firstname, form=form)
 
 
 @app.route('/impressum')
