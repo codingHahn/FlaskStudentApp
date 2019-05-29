@@ -10,13 +10,25 @@ from app.models import User
 
 # Landing Page Logic
 @app.route('/')
-@app.route('/index')
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     form = forms.LoginForm()
     '''Checks if the user is logged in and ajusts the user variable accordingly'''
     if current_user.is_authenticated:
         form = forms.LoginForm()
         return render_template('home.html', username=current_user.surname, form=form)
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('index'))
+            login_user(user)
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('index') 
+
+        flash('Login requested for user {}')
+        return redirect(next_page)
     return render_template('home.html', username='nobody', form=form)
 
   
